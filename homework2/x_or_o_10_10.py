@@ -44,7 +44,7 @@ def check_win(smb):
 
 def check_line(a1,a2,a3,a4,a5,smb):
     if a1['text'] == smb and a2['text'] == smb and a3['text'] == smb and a4['text'] == smb and a5['text'] == smb:
-        a1['background'] = a2['background'] = a3['background'] = a4['background'] = a5['background'] = 'green'
+        a1['background'] = a2['background'] = a3['background'] = a4['background'] = a5['background'] = 'red'
         global game_run
         game_run = False
 
