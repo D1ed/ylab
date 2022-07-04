@@ -48,14 +48,45 @@ def check_line(a1,a2,a3,a4,a5,smb):
         global game_run
         game_run = False
 
+def try_win(row,col):
+    res = True
+    field[row][col]['text'] = 'O'
+    for n in range (10):
+        for i in range (10):
+            if n <= 5:
+                if field[n][i]['text'] == field[n+1][i]['text'] == field[n+2][i]['text'] == field[n+3][i]['text'] == field[n+4][i]['text'] == 'O':
+                    print('1i try')
+                    res = False
+                if field[i][n]['text'] == field[i][n+1]['text'] == field[i][n+2]['text'] == field[i][n+3]['text'] == field[i][n+4]['text'] == 'O':
+                    print('2i try')
+                    res = False
+                if i <= 5:
+                    if field[n][i]['text'] == field[n+1][i+1]['text'] == field[n+2][i+2]['text'] == field[n+3][i+3]['text'] == field[n+4][i+4]['text'] == 'O':
+                        print('3i try')
+                        res = False
+            if i <= 5 and n >= 4:
+                if field[n][i]['text'] == field[n-1][i+1]['text'] == field[n-2][i+2]['text'] == field[n-3][i+3]['text'] == field[n-4][i+4]['text'] == 'O':
+                    print('4i try')
+                    res = False
+    field[row][col]['text'] = ' '
+    return res
+            
 
 def computer_move():
-    while True:
+    i = 1
+    while i <= 50:
         row = random.randint(0, 9)
         col = random.randint(0, 9)
         if field[row][col]['text'] == ' ':
+            i += 1
+        if field[row][col]['text'] == ' ' and try_win(row,col) is True:
             field[row][col]['text'] = 'O'
             break
+
+    else:
+        field[row][col]['text'] = 'O'
+        
+        # elif field[row][col]['text'] == ' ' and try_win(row,col) is True
 
 for row in range(10):
     line = []
