@@ -1,6 +1,4 @@
 from antagonistfinder import AntagonistFinder
-from typing import Generator, List, Tuple
-
 
 
 class SuperHero:
@@ -29,7 +27,6 @@ class SuperHero:
         if self.name == 'Clark Kent':
             self.incinerate_with_lasers()
 
-
 class Superman(SuperHero):
 
     def __init__(self):
@@ -57,16 +54,10 @@ class Media:
 
     @staticmethod
     def create_news(place, hero, tv_on=False):
-        if getattr(place, 'coordinates', True) != True:
-            place_name = getattr(place, 'coordinates', True) 
-        else:
-            place_name = getattr(place, 'name', 'place')
+        place_name = getattr(place, 'coordinates', True) if getattr(place, 'coordinates', True) != True \
+            else getattr(place, 'name', 'place')
         hero_name = getattr(hero, 'name', 'hero')
-        if tv_on == True:
-            tv = ' In TV!'
-        else:
-            tv = ' In newspaper!'
-
+        tv = ' In TV!' if tv_on == True else ' In newspaper!'
         print(f'{hero_name} saved the {place_name}!{tv}')
 
 class ChuckNorris(Fire_a_gun, SuperHero):
