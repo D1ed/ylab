@@ -4,7 +4,7 @@ from abc import ABC, abstractmethod
 class Place(ABC):
 
     @abstractmethod
-    def get_local_antagonist(self):
+    def get_loc_antagonist(self):
         ...
 
 class Kostroma:
