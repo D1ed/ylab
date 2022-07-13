@@ -11,25 +11,26 @@ def decorator_with_args(call_count, start_sleep_time, factor, border_sleep_time)
     def my_decorator(func):
         def wrapper(*args, **kwargs):
             print('Начало работы')
-            t = 0
+            t = start_sleep_time
+            stop = False
             for i in range(1,call_count+1):
-                if t < border_sleep_time:
+                if t < border_sleep_time and i != 1:
                     t = start_sleep_time * (factor**i)
-                    val = func(*args, **kwargs)
-                elif t >= border_sleep_time:
+                if t >= border_sleep_time:
                     t = border_sleep_time
-                    print('Конец Работы')
-                    break
-                elif i == call_count:
-                    print('Конец Работы')
-                    break
+                    stop = True
+                if i == call_count:
+                    stop = True
                 time.sleep(t)
-                print(f'Запуск номер {i}. Ожидание: {t} секунд. Результат декорируемой функций = {val}.')
-                
+                val = func(*args, **kwargs)
+                print(f'Запуск номер {i}. Ожидание: {t} секунд. Результат декорируемой функций = {val}.')    
+                if stop:
+                    print('Конец Работы')
+                    break
         return wrapper
     return my_decorator
 
-@decorator_with_args(5, 1, 2, 100)
+@decorator_with_args(8, 1, 2, 100)
 def func():
     return 'func_result'
 
