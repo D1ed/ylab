@@ -13,6 +13,7 @@ class SuperHero:
 
 
 class Kick:
+
     def attack(self):
         return 'Kick'
 
