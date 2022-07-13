@@ -3,7 +3,6 @@ from heroes import Superman, SuperHero, Media, ChuckNorris
 from places import Kostroma, Tokyo
 
 
-
 def save_the_place(hero: SuperHero, place: Union[Kostroma, Tokyo]):
     hero.find(place)
     hero.attack()
