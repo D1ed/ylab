@@ -8,7 +8,7 @@ class Place(ABC):
         ...
 
 class Kostroma:
-    city_name = 'Kostroma'
+    name = 'Kostroma'
 
     def get_loc_antagonist(self):
         print('Orcs hid in the forest')
