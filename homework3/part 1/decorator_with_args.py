@@ -21,7 +21,7 @@ def decorator_with_args(call_count, start_sleep_time, factor, border_sleep_time)
                     t = border_sleep_time
                 if i == call_count:
                     stop = True
-                # time.sleep(t)
+                time.sleep(t)
                 val = func(*args, **kwargs)
                 print(f'Запуск номер {i}. Ожидание: {t} секунд. Результат декорируемой функций = {val}.')    
                 if stop:
