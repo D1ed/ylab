@@ -8,8 +8,7 @@ def save_the_place(hero: SuperHero, place: Union[Kostroma, Tokyo]):
     hero.attack()
     if hero.can_use_ultimate_attack:
         hero.ultimate()
-    mass_media = Media()
-    mass_media.create_news(place, hero)
+    Media.create_news(place, hero)
 
 
 if __name__ == '__main__':
