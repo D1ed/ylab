@@ -13,7 +13,6 @@ class Kostroma:
     def get_loc_antagonist(self):
         print('Orcs hid in the forest')
 
-
 class Tokyo:
     name = 'Tokyo'
 
