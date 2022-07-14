@@ -42,9 +42,6 @@ class IncinerateWithLasers:
         print('Wzzzuuuup!')
 
 
-
-
-
 class Superman(SuperHero, Kick, IncinerateWithLasers):
 
     def __init__(self):
@@ -56,9 +53,6 @@ class Superman(SuperHero, Kick, IncinerateWithLasers):
     def ultimate(self):
         self.incinerate_with_lasers()
     
-
-
-
 
 class ChuckNorris(SuperHero, Gun):
     
