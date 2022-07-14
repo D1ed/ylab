@@ -1,4 +1,6 @@
 from antagonistfinder import AntagonistFinder
+from abc import ABC, abstractmethod
+from places import Place
 
 
 class SuperHero:
@@ -11,53 +13,97 @@ class SuperHero:
     def find(self, place):
         self.finder.get_antagonist(place)
 
+    def attack(self):
+        pass
+
+    def ultimate(self):
+        pass
 
 class Kick:
-
-    def attack(self):
+    
+    def kick(self):
         return 'Kick'
 
+class Gun:
 
-class Fire_a_gun:
-
-    def attack(self):
+    def fire_a_gun(self):
         print('PIU PIU')
 
 
-class Roundhouse_kick:
+class RoundhouseKick:
 
-    def attack(self):
+    def roundhouse_kick(self):
         print('Bump')
 
 
-class Incinerate_with_lasers:
+class IncinerateWithLasers:
 
-    def attack(self):
+    def incinerate_with_lasers(self):
         print('Wzzzuuuup!')
 
 
-class Media:
-
-    @staticmethod
-    def create_news(place, hero, tv_on=False):
-        place_name = getattr(place, 'coordinates', True) if getattr(place, 'coordinates', True) != True \
-            else getattr(place, 'name', 'place')
-        hero_name = getattr(hero, 'name', 'hero')
-        tv = ' In TV!' if tv_on == True else ' In newspaper!'
-        print(f'{hero_name} saved the {place_name}!{tv}')
 
 
-class Superman(Kick, SuperHero):
+
+class Superman(SuperHero, Kick, IncinerateWithLasers):
 
     def __init__(self):
         super(Superman, self).__init__('Clark Kent', True)
-    
+   
+    def attack(self):
+        self.kick()
+
     def ultimate(self):
-        Incinerate_with_lasers.attack(self)
+        self.incinerate_with_lasers()
+    
 
 
 
-class ChuckNorris(Fire_a_gun, SuperHero):
+
+class ChuckNorris(SuperHero, Gun):
     
     def __init__(self):
         super(ChuckNorris, self).__init__('Chack Norris', False)
+
+    def attack(self):
+        self.fire_a_gun()
+
+
+class Media(ABC):
+
+    def __init__(self, hero: SuperHero):
+        self.hero_name = getattr(hero, "name")
+
+    @abstractmethod
+    def create_news(self, place: Place):
+        pass
+
+
+class TV(Media):
+
+    def __init__(self, hero: SuperHero):
+        super(TV, self).__init__(hero)
+
+    def create_news(self, place: Place):
+        place_name = getattr(place, 'city_name')
+        print(f'{self.hero_name} saved the {place_name}! Watch in TV!')
+
+
+class Newspaper(Media):
+
+    def __init__(self, hero: SuperHero):
+        super(Newspaper, self).__init__(hero)
+
+    def create_news(self, place: Place):
+        place_name = getattr(place, 'city_name')
+        print(f'{self.hero_name} saved the {place_name}! Read in our newspaper!')
+
+
+class PlanetExpress(Media):
+
+    def __init__(self, hero: SuperHero):
+        super(PlanetExpress, self).__init__(hero)
+
+    def create_news(self, place: Place):
+        place_name = getattr(place, 'coordinate')
+        print(f'{self.hero_name} saved the {place_name}! Thanks for read us, PlanetExpress!')
